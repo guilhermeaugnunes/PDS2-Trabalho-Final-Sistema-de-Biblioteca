@@ -1,0 +1,6 @@
+# Pasta de build e arquivos compilados
+build/
+*.o
+
+# Executável
+meu_sistema
