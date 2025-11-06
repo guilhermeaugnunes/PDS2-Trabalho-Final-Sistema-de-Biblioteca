@@ -1,6 +1,8 @@
-# Pasta de build e arquivos compilados
+# Ignora a pasta de build
 build/
-*.o
 
-# Executável
+# Ignora executáveis (como o seu meu_teste)
+*.exe
+*.o
+meu_teste
 meu_sistema
