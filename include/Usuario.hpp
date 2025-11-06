@@ -13,7 +13,7 @@ private:
     std::string _nome;
     int _matricula;
     std::string _email;
-    std::string _tipo;
+    //std::string _tipo;
     
     //Atributos declarações
     std::vector<Emprestimo*> _historicoEmprestimos;
@@ -22,7 +22,7 @@ private:
     
 
 protected: 
-    Usuario(const std::string& nome, int matricula, const std::string& email, const std::string& tipo);
+    Usuario(const std::string& nome, int matricula, const std::string& email);
 
 public:
     virtual ~Usuario();
@@ -31,7 +31,7 @@ public:
     std::string getNome() const;
     int getMatricula() const;
     std::string getEmail() const;
-    std::string getTipo() const;
+    virtual std::string getTipo() const = 0;
 
     //metodo virtual
     virtual int limiteEmprestimo() const = 0;

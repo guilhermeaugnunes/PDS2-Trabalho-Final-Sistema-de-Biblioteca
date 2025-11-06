@@ -5,8 +5,9 @@
 
 class Aluno : public Usuario {
 public:
-    Aluno(const std::string& nome, int matricula, const std::string& email, const std::string& tipo);
+    Aluno(const std::string& nome, int matricula, const std::string& email);
     int limiteEmprestimo() const override;
+    std::string getTipo() const override;
 };
 
 #endif

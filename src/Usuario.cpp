@@ -2,8 +2,8 @@
 #include <string>
 //#include <vector>
 
-Usuario::Usuario(const std::string& nome, int matricula, const std::string& email, const std::string& tipo)
-    : _nome(nome), _matricula(matricula), _email(email), _tipo(tipo) {}
+Usuario::Usuario(const std::string& nome, int matricula, const std::string& email)
+    : _nome(nome), _matricula(matricula), _email(email) {}
 
 Usuario::~Usuario() {}
     
@@ -17,10 +17,6 @@ int Usuario::getMatricula() const {
 
 std::string Usuario::getEmail() const {
     return this->_email;
-}
-
-std::string Usuario::getTipo() const {
-    return this->_tipo;
 }
 
 //metodos dependentes de outras classes (que não estão prontas)

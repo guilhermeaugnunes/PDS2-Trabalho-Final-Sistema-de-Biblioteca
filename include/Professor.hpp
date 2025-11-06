@@ -5,9 +5,9 @@
 
 class Professor : public Usuario {
 public:
-    Professor(const std::string& nome, int matricula, const std::string& email, const std::string& tipo);
+    Professor(const std::string& nome, int matricula, const std::string& email);
     int limiteEmprestimo() const override;
+    std::string getTipo() const override;   
 };
-
 
 #endif
