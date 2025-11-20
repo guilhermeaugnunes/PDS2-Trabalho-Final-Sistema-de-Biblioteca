@@ -1,5 +1,6 @@
 # Ignora a pasta de build
 build/
+.vscode/
 
 # Ignora executáveis (como o seu meu_teste)
 *.exe

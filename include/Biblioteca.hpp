@@ -9,6 +9,7 @@
 #include "SistemaNotificacao.hpp"
 #include "Usuario.hpp"
 
+#include <fstream>
 #include <map>
 #include <string>
 #include <iostream>
@@ -26,6 +27,8 @@ class Biblioteca {
     void removerUsuario (int matricula);
     Usuario* buscarUsuario (int matricula);
     void listarUsuarios() const;
+    void salvarUsuariosEmArquivo(const std::string& nomeArquivo);
+    void carregarUsuariosDoArquivo(const std::string& nomeArquivo);
 
 };
 

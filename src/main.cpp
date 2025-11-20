@@ -2,43 +2,59 @@
 #include <string>
 #include "Aluno.hpp"
 #include "Professor.hpp"
+#include "Biblioteca.hpp"
 
 int main () {
+    //MAIN DE TESTE APENAS PARA A CLASSE USUARIO E SUBCLASSES
+    Biblioteca biblio;
 
-    Usuario* alunoHeap = new Aluno("Guilherme Nunes", 2024017015, "guilhermeaugnunes@ufmg.br");
-    Professor* profHeap = new Professor("Vitor Angelo", 123456, "vitortorres@elt.ufmg.br");
+    /*Usuario* u1 = new Aluno ("Guilherme Augusto Nunes", 2024017015, "guilhermeaugnunes@ufmg.br");
+    Usuario* u2 = new Professor ("Vangellis Oliveira", 2025912079, "vangellis@ufmg.br");
+    Usuario* u3 = new Aluno ("Gabriel dos Reis", 2024589325, "greis@ufmg.br");
 
-    std::cout << "----- Teste Aluno Heap-----" << std::endl;
-    std::cout << "Nome: " << alunoHeap->getNome() << std::endl;
-    std::cout << "Tipo: " << alunoHeap->getTipo() << std::endl;
-    std::cout << "Matricula: " << alunoHeap->getMatricula() << std::endl;
-    std::cout << "Limite: " << alunoHeap->limiteEmprestimo() << std::endl;
+    std::cout << "--- Teste de Cadastro ---" << std::endl;
+    biblio.cadastrarUsuario(u1);
+    biblio.cadastrarUsuario(u2);
+    biblio.cadastrarUsuario(u3);
 
-    std::cout << "\n----- Teste Professor Heap -----" << std::endl;
-    std::cout << "Nome: " << profHeap->getNome() << std::endl;
-    std::cout << "Tipo: " << profHeap->getTipo() << std::endl;
-    std::cout << "Matricula: " << profHeap->getMatricula() << std::endl;
-    std::cout << "Limite: " << profHeap->limiteEmprestimo() << std::endl;
+    std::cout << "\n--- Teste de Duplicidade ---" << std::endl;
+    biblio.cadastrarUsuario(u2); //tem que dar erro
 
-    ////////////////////teste via stack
-
-    Aluno alunoStack("Joao Silva", 12345, "joao@ufmg.br");
-    Professor profStack("Ana Costa", 67890, "ana@dcc.ufmg.br");
-
-    Usuario& alunoRef = alunoStack;
-    Usuario& profRef = profStack;
-
-    std::cout << "\n\n----- Teste Aluno Stack-----" << std::endl;
-    std::cout << "Nome: " << alunoRef.getNome() << std::endl;
-    std::cout << "Tipo: " << alunoRef.getTipo() << std::endl;
-    std::cout << "Matricula: " << alunoRef.getMatricula() << std::endl;
-    std::cout << "Limite: " << alunoRef.limiteEmprestimo() << std::endl;
-
-    std::cout << "\n\n----- Teste Professor Stack-----" << std::endl;
-    std::cout << "Nome: " << profRef.getNome() << std::endl;
-    std::cout << "Tipo: " << profRef.getTipo() << std::endl;
-    std::cout << "Matricula: " << profRef.getMatricula() << std::endl;
-    std::cout << "Limite: " << profRef.limiteEmprestimo() << std::endl;
+    std::cout << "\n--- Teste de Listagem ---" << std::endl;
+    biblio.listarUsuarios();
     
+    std::cout << "\n--- Teste de Busca ---" << std::endl;
+    Usuario* u = biblio.buscarUsuario(2024017015);
+    if (u != nullptr) {
+        std::cout << "Encontrado! " << u->getNome() << std::endl;
+    }
+    else {
+        std::cout << "Usuario nao encontrado. " << std::endl;
+    }
+
+    std::cout << "\n--- Teste de Remocao ---" << std::endl;
+    biblio.removerUsuario(2025912079);
+
+    std::cout << "\n--- Listagem apos Remocao ---" << std::endl;
+    biblio.listarUsuarios();*/
+
+    // 1. Tenta carregar do disco (na primeira vez vai falhar, normal)
+    biblio.carregarUsuariosDoArquivo("banco_usuarios.txt");
+
+    // 2. Se o banco estava vazio, vamos popular para testar
+    // (Você pode comentar isso depois de rodar a primeira vez!)
+    if (biblio.buscarUsuario(2024017015) == nullptr) {
+        std::cout << "Cadastrando usuarios iniciais..." << std::endl;
+        biblio.cadastrarUsuario(new Aluno("Guilherme Augusto", 2024017015, "guilhermeaugnunes@ufmg.br"));
+        biblio.cadastrarUsuario(new Professor("Vangellis Sagnori", 2025912079, "vangellis@ufmg.br"));
+        biblio.cadastrarUsuario(new Aluno("Vitor Alencar", 2025911083, "vitoralencar@ufmg.br"));
+    }
+
+    std::cout << "\n--- Listagem Atual ---" << std::endl;
+    biblio.listarUsuarios();
+
+    // 3. Salva tudo no disco antes de sair
+    biblio.salvarUsuariosEmArquivo("banco_usuarios.txt");
+
     return 0;
 }
