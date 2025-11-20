@@ -3,7 +3,7 @@
 #include <iostream>
 
 
-// ----------------Instancias da Classe Usuario - Guilherme----------------
+//----------------Instancias da Classe Usuario - Guilherme----------------
 Biblioteca::Biblioteca() {}
 Biblioteca::~Biblioteca() {
     for (auto const& pair : _usuarios) {
@@ -38,5 +38,7 @@ void Biblioteca::removerUsuario (int matricula) {
         std::cout << "Usuario nao encontrado. " << std::endl;
     }
 }
-Usuario* Biblioteca::buscarUsuario (int matricula)  {}
+Usuario* Biblioteca::buscarUsuario (int matricula)  {
+
+}
 void Biblioteca::listarUsuarios() const  {}
