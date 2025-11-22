@@ -23,9 +23,20 @@ std::string Usuario::getEmail() const {
 void Usuario::adicionaEmprestimo(Emprestimo* emprestimo) {
     //sem classe necessária ainda (Emprestimo.hpp)
 }
-void Usuario::adicionaNotificacao(SistemaNotificacao* notificacao) {
-    //sem classe necessária ainda (SistemaNotificacao.hpp)
+//alterei e adicionei aqui - bebel
+void Usuario::adicionaNotificacao(const std::string& mensagem) {
+    this->_notificacoes.push_back(mensagem);
 }
+
+const std::vector<std::string>& Usuario::getNotificacoes() const {
+    return this->_notificacoes;
+}
+
+void Usuario::limparNotificacoes() {
+    this->_notificacoes.clear();
+
+}
+
 void Usuario::adicionaReserva(Reserva* reserva) {
     //sem classe necessária ainda (Reserva.hpp)
 }
