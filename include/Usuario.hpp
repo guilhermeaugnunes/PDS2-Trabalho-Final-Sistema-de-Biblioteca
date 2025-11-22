@@ -17,7 +17,7 @@ private:
     
     //Atributos declarações
     std::vector<Emprestimo*> _historicoEmprestimos;
-    std::vector<SistemaNotificacao*> _notificacoes;
+    std::vector<std::string> _notificacoes; // alterei porque o usuário vai guardar só uma lista de textos (no caso as mensagens)
     std::vector<Reserva*> _reservas;
     
 
@@ -38,8 +38,11 @@ public:
 
     //metodos dependentes de outras classes (que não estão prontas)
     void adicionaEmprestimo(Emprestimo* emprestimo);
-    void adicionaNotificacao(SistemaNotificacao* notificacao);
-    void adicionaReserva(Reserva* reserva);
+    void adicionaNotificacao(const std::string& mensagem); //alterei tbm - bebel
+    const std::vector<std::string>& getNotificacoes() const; // adicionei esse pra classe SistemaNotificacao poder ver as mensagens - bebel 
+    void limparNotificacoes(); 
+
+    void adicionaReserva(Reserva* reserva); 
 
     bool verificaPendencias() const;
 };
