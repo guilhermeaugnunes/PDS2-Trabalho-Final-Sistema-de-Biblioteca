@@ -1,7 +1,7 @@
 #include "SistemaNotificacao.hpp"
 #include <iostream>
 
-// Construtor e Destrutor vazios (não precisamos inicializar nada especial por enquanto)
+// construtor e destrutor vazios
 SistemaNotificacao::SistemaNotificacao() {}
 SistemaNotificacao::~SistemaNotificacao() {}
 
@@ -20,17 +20,33 @@ void SistemaNotificacao::notificarReservaDisponivel(Usuario& usuario, std::strin
     usuario.adicionaNotificacao(mensagem);
 }
 
-void SistemaNotificacao::exibirNotificacoes(const Usuario& usuario) {
+void SistemaNotificacao::notificarEmprestimo(Usuario& usuario, std::string tituloLivro, std::string dataDevolucao){
+    std::string mensagem = "O livro ' " + tituloLivro + " ' foi emprestado com sucesso! Devolva ate: " + dataDevolucao;    
+    usuario.adicionaNotificacao(mensagem);
+}
+
+void SistemaNotificacao::notificarDevolucaoProxima(Usuario& usuario, std::string tituloLivro, int diasRestantes) {
+    std::string mensagem = "Lembrete! Faltam " + std::to_string(diasRestantes) + " dias para devolver ' " + tituloLivro + " ' .";   
+    usuario.adicionaNotificacao(mensagem); 
+}
+
+void SistemaNotificacao::exibirNotificacoes(Usuario& usuario, bool limparAposLer) {
     std::cout << "--- Notificacoes para " << usuario.getNome() << " ---" << std::endl;
     
-    const auto& listaMensagens = usuario.getNotificacoes(); // pega a lista de strings do usuário
+    auto& listaMensagens = usuario.getNotificacoes(); // pega a lista de strings do usuário
 
     if (listaMensagens.empty()) {
-        std::cout << "Nenhuma notificacao pendente." << std::endl;
+        std::cout << "Nenhuma notificacao pendente!" << std::endl;
     } else {
         for (const std::string& msg : listaMensagens) {
-            std::cout << "[msg]: " << msg << std::endl; //loop pra cada uma
+            std::cout << "[msg]: " << msg << std::endl;
         }
     }
     std::cout << "-------------------------------------------" << std::endl;
+
+    if (limparAposLer && !listaMensagens.empty()){
+        usuario.limparNotificacoes();
+        std::cout << "[Sistema] As mensagens lidas foram apagadas da caixa de entrada." << std::endl;
+    }
 }
+

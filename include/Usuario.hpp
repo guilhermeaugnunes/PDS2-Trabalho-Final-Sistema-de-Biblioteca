@@ -39,8 +39,10 @@ public:
     //metodos dependentes de outras classes (que não estão prontas)
     void adicionaEmprestimo(Emprestimo* emprestimo);
     void adicionaNotificacao(const std::string& mensagem); //alterei tbm - bebel
-    void adicionaReserva(Reserva* reserva);
-    const std::vector<std::string>& getNotificacoes() const; // adicionei esse pra classe SistemaNotificacao poder ver as mensagens - bebel
+    const std::vector<std::string>& getNotificacoes() const; // adicionei esse pra classe SistemaNotificacao poder ver as mensagens - bebel 
+    void limparNotificacoes(); 
+
+    void adicionaReserva(Reserva* reserva); 
 
     bool verificaPendencias() const;
 };

@@ -30,6 +30,12 @@ void Usuario::adicionaNotificacao(const std::string& mensagem) {
 
 const std::vector<std::string>& Usuario::getNotificacoes() const {
     return this->_notificacoes;
+
+}
+
+void Usuario::limparNotificacoes() {
+    this->_notificacoes.clear();
+
 }
 void Usuario::adicionaReserva(Reserva* reserva) {
     //sem classe necessária ainda (Reserva.hpp)
