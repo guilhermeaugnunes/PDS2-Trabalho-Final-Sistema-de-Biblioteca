@@ -44,7 +44,7 @@ public:
     const std::vector<std::string>& getNotificacoes() const; // adicionei esse pra classe SistemaNotificacao poder ver as mensagens - bebel 
     void limparNotificacoes(); 
 
-    void adicionaReserva(Reserva* reserva); 
+    void adicionaReserva(Reserva* reserva);
 
     bool verificaPendencias() const;
 };
