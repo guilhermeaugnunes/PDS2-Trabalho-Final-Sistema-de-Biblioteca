@@ -1,6 +1,6 @@
 #include "Usuario.hpp"
 #include <string>
-//#include <vector>
+#include <vector>
 
 Usuario::Usuario(const std::string& nome, int matricula, const std::string& email)
     : _nome(nome), _matricula(matricula), _email(email) {}
@@ -21,7 +21,8 @@ std::string Usuario::getEmail() const {
 
 //metodos dependentes de outras classes (que não estão prontas)
 void Usuario::adicionaEmprestimo(Emprestimo* emprestimo) {
-    //sem classe necessária ainda (Emprestimo.hpp)
+    this->_historicoEmprestimos.push_back(emprestimo);
+
 }
 //alterei e adicionei aqui - bebel
 void Usuario::adicionaNotificacao(const std::string& mensagem) {
