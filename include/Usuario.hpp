@@ -36,6 +36,8 @@ public:
     //metodo virtual
     virtual int limiteEmprestimo() const = 0;
 
+
+    bool atingiuLimiteEmprestimos() const; // confia - gabrel
     //metodos dependentes de outras classes (que não estão prontas)
     void adicionaEmprestimo(Emprestimo* emprestimo);
     void adicionaNotificacao(const std::string& mensagem); //alterei tbm - bebel
