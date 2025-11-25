@@ -1,6 +1,6 @@
 #include "Usuario.hpp"
 #include <string>
-//#include <vector>
+#include <vector>
 
 Usuario::Usuario(const std::string& nome, int matricula, const std::string& email)
     : _nome(nome), _matricula(matricula), _email(email) {}
@@ -43,4 +43,7 @@ void Usuario::adicionaReserva(Reserva* reserva) {
 
 bool Usuario::verificaPendencias() const {
     return false;
+    bool Usuario::atingiuLimiteEmprestimos() const {
+    return this->_historicoEmprestimos.size() >= (size_t)this->limiteEmprestimo();
+}
 }
