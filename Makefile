@@ -29,6 +29,7 @@ $(TARGET): $(OBJS)
 
 # Compilação Genérica (.cpp -> .o)
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp
+	@mkdir -p $(BUILD_DIR)
 	@echo "CC -> Compilando $<..."
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
 
