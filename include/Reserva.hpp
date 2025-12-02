@@ -1,36 +1,25 @@
 #ifndef RESERVA_HPP
 #define RESERVA_HPP
 
+#include "Usuario.hpp"
+#include "Livro.hpp"
 #include <string>
 
-class Usuario;
-class Livro;
-
 class Reserva {
-public:
-    enum class StatusReserva {
-        ATIVA,
-        CONCLUIDA,
-        CANCELADA_USUARIO,
-        CANCELADA_PRAZO 
-    };
-
 private:
-    Usuario* usuario;
-    Livro* livro;
-    StatusReserva status;
+    Usuario* _usuario;
+    Livro* _livro;
+    std::string _dataReserva;
+    bool _ativa;
 
 public:
-
     Reserva(Usuario* usuario, Livro* livro);
-    virtual ~Reserva();
+    ~Reserva();
+
     Usuario* getUsuario() const;
     Livro* getLivro() const;
-    StatusReserva getStatus() const;
-    void concluirReserva();
-    void cancelarReserva(bool porPrazo = false); 
-        void notificarDisponibilidade();
     bool isAtiva() const;
+    void cancelar(); // Desativa a reserva
 };
 
 #endif
