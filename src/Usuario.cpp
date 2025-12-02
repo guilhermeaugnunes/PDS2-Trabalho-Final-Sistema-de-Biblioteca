@@ -1,6 +1,6 @@
 #include "Usuario.hpp"
-#include <string>
-#include <vector>
+#include "Emprestimo.hpp"
+#include "Reserva.hpp"
 
 Usuario::Usuario(const std::string& nome, int matricula, const std::string& email)
     : _nome(nome), _matricula(matricula), _email(email) {}
@@ -19,11 +19,10 @@ std::string Usuario::getEmail() const {
     return this->_email;
 }
 
-//metodos dependentes de outras classes (que não estão prontas)
 void Usuario::adicionaEmprestimo(Emprestimo* emprestimo) {
-    //sem classe necessária ainda (Emprestimo.hpp)
+    this->_historicoEmprestimos.push_back(emprestimo);
 }
-//alterei e adicionei aqui - bebel
+
 void Usuario::adicionaNotificacao(const std::string& mensagem) {
     this->_notificacoes.push_back(mensagem);
 }
@@ -34,16 +33,25 @@ const std::vector<std::string>& Usuario::getNotificacoes() const {
 
 void Usuario::limparNotificacoes() {
     this->_notificacoes.clear();
-
 }
 
 void Usuario::adicionaReserva(Reserva* reserva) {
-    //sem classe necessária ainda (Reserva.hpp)
+    this->_reservas.push_back(reserva);
 }
 
 bool Usuario::verificaPendencias() const {
-    return false;
-    bool Usuario::atingiuLimiteEmprestimos() const {
-    return this->_historicoEmprestimos.size() >= (size_t)this->limiteEmprestimo();
+    // Lógica simplificada: se tiver notificação de atraso, tem pendência.
+    // Você pode expandir isso verificando multas reais depois.
+    return false; 
 }
+
+bool Usuario::atingiuLimiteEmprestimos() const {
+    // Verifica quantos empréstimos estão ATIVOS
+    int ativos = 0;
+    for (auto* emp : _historicoEmprestimos) {
+        if (emp->isAtivo()) {
+            ativos++;
+        }
+    }
+    return ativos >= this->limiteEmprestimo();
 }

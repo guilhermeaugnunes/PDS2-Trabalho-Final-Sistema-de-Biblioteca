@@ -22,13 +22,15 @@ Emprestimo::Emprestimo(Usuario* u, Livro* l, SistemaNotificacao* notificador) {
 
     this->dataEmprestimo = "HOJE";
     this->dataPrevistaDevolucao = calcularDataDevolucao(this->dataEmprestimo);
+    
+    // Registra o empréstimo no usuário
     u->adicionaEmprestimo(this);
 
     notificador->notificarEmprestimo(*this->usuario, this->livro->getTitulo(), this->dataPrevistaDevolucao);
 }
 
 void Emprestimo::renovar(SistemaNotificacao* notificador) {
-        if (this->livro->getQuantidadeReservada() > 0) {
+    if (this->livro->getQuantidadeReservada() > 0) {
         std::cout << "Erro: Nao e possivel renovar pois ha reservas para este livro." << std::endl; 
         return;
     }
@@ -57,14 +59,16 @@ void Emprestimo::registrarDevolucao(SistemaNotificacao* notificador) {
     this->status = "CONCLUIDO";
     this->livro->realizarDevolucao();
     notificador->notificarDevolucao(*this->usuario, this->livro->getTitulo());
+    
     if (this->estaAtrasado()) {
-        int diasAtraso = 1;
+        int diasAtraso = 1; // Simplificação para exemplo
         notificador->notificarAtraso(*this->usuario, this->livro->getTitulo(), diasAtraso);
     }
 }
 
 bool Emprestimo::estaAtrasado() {
     std::string dataAtual = "HOJE";
+    // Comparação de string não é ideal para data, mas mantendo a lógica original por enquanto
     return (dataAtual > this->dataPrevistaDevolucao && this->status == "ATIVO");
 }
 
@@ -72,12 +76,20 @@ std::string Emprestimo::calcularDataDevolucao(std::string dataBase) {
     return dataBase + " + 7 dias";
 }
 
-Usuario* Emprestimo::getUsuario() const { return this->usuario; }
-Livro* Emprestimo::getLivro() const { return this->livro; }
-std::string Emprestimo::getDataPrevistaDevolucao() const { return this->dataPrevistaDevolucao; }
-bool Emprestimo::isAtivo() const { return this->status == "ATIVO"; }
+// --- Getters (Apenas UMA vez) ---
 
-Usuario* Emprestimo::getUsuario() const { return this->usuario; }
-Livro* Emprestimo::getLivro() const { return this->livro; }
-std::string Emprestimo::getDataPrevistaDevolucao() const { return this->dataPrevistaDevolucao; }
-bool Emprestimo::isAtivo() const { return this->status == "ATIVO"; }
+Usuario* Emprestimo::getUsuario() const { 
+    return this->usuario; 
+}
+
+Livro* Emprestimo::getLivro() const { 
+    return this->livro; 
+}
+
+std::string Emprestimo::getDataPrevistaDevolucao() const { 
+    return this->dataPrevistaDevolucao; 
+}
+
+bool Emprestimo::isAtivo() const { 
+    return this->status == "ATIVO"; 
+}
